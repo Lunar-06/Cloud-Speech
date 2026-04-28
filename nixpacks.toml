@@ -1,0 +1,13 @@
+# nixpacks.toml - 告诉 Railway 同时需要 Python 和 Node.js
+[phases.setup]
+nixPkgs = ["python312", "nodejs", "npm"]
+
+[phases.install]
+cmds = [
+    "pip install -r backend/requirements.txt",
+    "npm install",
+    "npm run build"
+]
+
+[start]
+cmd = "cd backend && python -m uvicorn main:app --host 0.0.0.0 --port $PORT"
